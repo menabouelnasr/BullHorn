@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="BLOG_ACCT")
+@Table(name="BLOG_ACCT", schema= "TESTDB")
 @NamedQuery(name="BlogAcct.findAll", query="SELECT b FROM BlogAcct b")
 public class BlogAcct implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -35,6 +35,7 @@ public class userProfile extends HttpServlet {
     	EntityManager em = DBUtil.getEmFactory().createEntityManager();
     	EntityTransaction trans = em.getTransaction();
     	trans.begin(); 
+    	System.out.println(acct);
     	try {
     	em.persist(acct);
     	trans.commit();
@@ -62,6 +63,7 @@ public class userProfile extends HttpServlet {
     	password= request.getParameter("pwd");
     	motto=request.getParameter("motto");
     	Date date = new Date();
+		System.out.println(username + " " + password + " " + motto);
 		
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		try 
