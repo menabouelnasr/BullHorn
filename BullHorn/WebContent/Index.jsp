@@ -13,7 +13,7 @@
    p {background-color: white;}
    h1{text:white; text-aligh-left;}
    </style>
-<title>Insert title here</title>
+<title>Bullhorn</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -30,6 +30,5 @@ Leave a Comment:<br>
 <input href="BlogInsert" type=submit name=submit value="submit"> </input>
 <p></p>
 </form>
-${message}
 </body>
 </html>

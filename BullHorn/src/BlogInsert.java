@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Blog;
+import model.BlogAcct;
 import customTools.DBUtil;
 
 /**
@@ -72,20 +73,58 @@ public class BlogInsert extends HttpServlet
     	return blogs;
     	
     }
+    
+   /* public List<BlogAcct> getUsers() {
+    	EntityManager em = DBUtil.getEmFactory().createEntityManager();
+    	String qString = "Select b from BlogAcct where ";
+    	TypedQuery<Blog> q = em.createQuery(qString, Blog.class);
+    	
+    	List<Blog> blogs;
+    	try{ blogs= q.getResultList();
+    	if(blogs == null || blogs.isEmpty())
+    		blogs= null;
+    	}
+    	finally
+    	{
+    		em.close();
+    	}
+    	return blogs;
+    	
+    }*/
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String user_name = request.getParameter("user_name");
+		String pwd = request.getParameter("pwd");
+		
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		try 
+		{
+			model.BlogAcct cust = em.find(model.BlogAcct.class, (long)1); //gets everything on line 4 of demo customer
+			System.out.println(cust.getUserId());
+			System.out.println(cust.getPwd());
+		} 
+		catch (Exception e)
+		{
+			System.out.println(e);
+		} 
+		finally 
+		{
+			em.close();
+			System.out.println("cerrado!");
+		}
 	}
+
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		System.out.println(request.getParameter("guest"));
+		if (request.getParameter("guest")==null)
+		{
+		
 		String blog, output="";
     	blog=request.getParameter("blog");
-    	System.out.println(blog);
-    	
-    	
     	Date date = new Date();
 		
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -94,23 +133,41 @@ public class BlogInsert extends HttpServlet
 			model.Blog user = new Blog();
 			user.setComments(blog);
 			user.setDates(date);
-			BlogInsert.insert(user);
+			insert(user);
 		} catch (Exception e){
 			System.out.println(e);
 		} finally {
 			em.close();
 			System.out.println("cerrado!");
 		}
-		output+="<table class=table table-striped>";
+		output+="<table class= \"table table-striped\">";
 		output+="<tr><th>Recent Comments</th></tr> ";
 		List<Blog> a = getBlogs();
 		for(Blog b : a)
 		{
 			output+= "<tr><td>"+ b.getComments()+"</td></tr>";
+			System.out.println("Test");
 		}
 		request.setAttribute("message", output);
 	    getServletContext().getRequestDispatcher("/Output.jsp").forward(request,response);
-		
+		output="";
+		}
+		else
+		{
+			String blog, output="";
+			
+			output+="<table class=table table-striped>";
+			output+="<tr><th>Recent Comments</th></tr> ";
+			List<Blog> a = getBlogs();
+			for(Blog b : a)
+			{
+				output+= "<tr><td>"+ b.getComments()+"</td></tr>";
+				System.out.println("Test");
+			}
+			request.setAttribute("message", output);
+		    getServletContext().getRequestDispatcher("/Output.jsp").forward(request,response);
+			output="";
+		}
 	}
 
 }

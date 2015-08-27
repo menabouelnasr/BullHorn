@@ -3,6 +3,7 @@
 	<persistence-unit name="BullHorn" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>model.Blog</class>
+		<class>model.BlogAcct</class>
 		<properties>
 			<property name="eclipselink.exclude-eclipselink-orm" value="false"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>

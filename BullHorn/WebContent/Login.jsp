@@ -13,7 +13,7 @@
    p {background-color: white;}
    h1{text:white; text-aligh-left;}
    </style>
-<title>Bullhorn</title>
+<title>Login</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -22,13 +22,21 @@
 </div>
 </nav>
 <div class= "container"></div>
-<form action="Index.jsp" >
+<form action="Index.jsp">
 <br>
-${message}
+<input type="text" placeholder= "User Name" name="user_name">
 <br>
-
+<br>
+<input type="password" placeholder= "Password" name="pwd">
+<br>
+<br>
+<input  type=submit name=login value="Login"> </input>
+</form>
+<form action="BlogInsert" method = "post" >
+<input  type=submit name=guest value="Guest"> </input>
 <p></p>
 </form>  
+
 </div>  
 
 </body>
