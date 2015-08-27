@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -18,6 +19,11 @@ public class BlogAcct implements Serializable {
 	@Column(name="USER_ID")
 	private long userId;
 
+	@Temporal(TemporalType.DATE)
+	private Date joindate;
+
+	private String motto;
+
 	private String pwd;
 
 	@Column(name="USER_NAME")
@@ -32,6 +38,22 @@ public class BlogAcct implements Serializable {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	public Date getJoindate() {
+		return this.joindate;
+	}
+
+	public void setJoindate(Date joindate) {
+		this.joindate = joindate;
+	}
+
+	public String getMotto() {
+		return this.motto;
+	}
+
+	public void setMotto(String motto) {
+		this.motto = motto;
 	}
 
 	public String getPwd() {

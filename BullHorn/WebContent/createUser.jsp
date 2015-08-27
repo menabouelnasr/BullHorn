@@ -13,25 +13,33 @@
    p {background-color: white;}
    h1{text:white; text-aligh-left;}
    </style>
-<title>Bullhorn</title>
+<title>Login</title>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
   <h1>BullHorn Blog</h1>
 </div>
-<form action = "Index.jsp">
-<input type=submit name=submit value="submit"> </input>
-</form>
 </nav>
 <div class= "container"></div>
-<form action="Index.jsp" >
+<form action="userProfile" method = "post">
 <br>
-${message}
+<input type="text" placeholder= "User Name" name="user_name" required>
 <br>
+<br>
+<input type="password" placeholder= "Password" name="pwd" required>
+<br>
+<br>
+<input type="text" placeholder= "Motto" name="motto" required>
+<br>
+<br>
+<br>
+<input  type=submit name=submit value="Register"> </input>
 
-<p></p>
+
 </form>  
+
 </div>  
 
 </body>

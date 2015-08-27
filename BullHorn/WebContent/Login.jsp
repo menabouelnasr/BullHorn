@@ -16,13 +16,16 @@
 <title>Login</title>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
   <h1>BullHorn Blog</h1>
 </div>
+<form action="createUser.jsp" >
+<input  type=submit name=createUser value="New User"> </input></form>
 </nav>
 <div class= "container"></div>
-<form action="Index.jsp">
+<form action="BlogInsert" method = "get">
 <br>
 <input type="text" placeholder= "User Name" name="user_name">
 <br>
@@ -34,6 +37,9 @@
 </form>
 <form action="BlogInsert" method = "post" >
 <input  type=submit name=guest value="Guest"> </input>
+<br>
+<br>
+${message}
 <p></p>
 </form>  
 
