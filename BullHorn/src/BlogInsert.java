@@ -82,6 +82,7 @@ public class BlogInsert extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		long ID;
+		String blog, output="";
     	
 		String userName = request.getParameter("user_name");
 		String pwd = request.getParameter("pwd");
@@ -94,35 +95,50 @@ public class BlogInsert extends HttpServlet
 		.setParameter("userName", userName)
 	    .setMaxResults(20)
 	    .getResultList();
-	
+		
 		
 		if (accts.size()==0)
 		{
-			String output = "Incorrect user name or password";
+			output = "Incorrect user name or password";
 			request.setAttribute("message", output);
 		    getServletContext().getRequestDispatcher("/Login.jsp").forward(request,response);
 			
 		}
 		else 
 		{
-			String blog, output="";
+			
 			System.out.println("account found");
 			output+="<table class= \"table table-striped\">";
 			output+="<tr><th>Recent Comments</th><th>User Id</th></tr> ";
 			List<Blog> a = getBlogs();
 			
+			
+			
+			
+			String username,comment = "";
+			long UserID = 0;
+			Date postDate = null;
+			
+			UserID= accts.get(0).getUserId();
+			System.out.println("userID: " + UserID);
+				
+		
+			
+			
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("UserID", UserID);
+	    	System.out.println(UserID);
+			
+			
 			for(Blog b : a)
 			{
 				output+= "<tr><td>"+ b.getComments()+"</td><td>" + b.getUserid()+"</td></tr>";
-
-				HttpSession session = request.getSession();
-				ID= b.getUserid();
-		    	session.setAttribute("UserID", ID);
 		    	
 			}
 			request.setAttribute("message", output);
 		    getServletContext().getRequestDispatcher("/Output.jsp").forward(request,response);
-			
+		    output="";
 		}
 	}
 
