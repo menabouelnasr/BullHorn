@@ -155,7 +155,7 @@ public class BlogInsert extends HttpServlet
 		//System.out.println(request.getParameter("guest"));
 		if (request.getParameter("guest")==null)
 		{
-		
+		session.setAttribute("LoggedIn", true);
 		String blog, output="";
     	blog=request.getParameter("blog");
     	Date date = new Date();
@@ -185,6 +185,7 @@ public class BlogInsert extends HttpServlet
 		}
 		else
 		{
+			session.setAttribute("LoggedIn", false);
 			String blog, output="";
 			
 			output+="<table class= \"table table-striped\">";

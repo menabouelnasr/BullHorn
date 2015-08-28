@@ -35,7 +35,7 @@
 <br>
 <input  type=submit name=login value="Login"> </input>
 </form>
-<form action="BlogInsert">
+<form action="BlogInsert" method= "Post">
 <input  type=submit name=guest value="Guest"> </input>
 
 <br>

@@ -20,17 +20,19 @@
 <div class="jumbotron"> 
   <h1>BullHorn Blog</h1>
 </div>
+</nav>
+<% if ((Boolean)session.getAttribute("LoggedIn")) {%>
 <form action = "Index.jsp">
 <input type=submit name=submit value="New Post"> </input>
 </form>
-</nav>
+
 <div class= "container"></div>
 
 <form action= userProfile method="Get">
 
 <input type= submit name=submit value="See Profile"></input>
 </form>
-
+<% }; %>
 <br>
 ${message}
 <br>
