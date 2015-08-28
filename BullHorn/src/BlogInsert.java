@@ -17,9 +17,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Blog;
-import model.BlogAcct;
+import model.Blogacct;
 import customTools.DBUtil;
 
 /**
@@ -79,6 +80,8 @@ public class BlogInsert extends HttpServlet
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		long ID;
+		
 		String userName = request.getParameter("user_name");
 		String pwd = request.getParameter("pwd");
 		System.out.println(userName);
@@ -90,6 +93,7 @@ public class BlogInsert extends HttpServlet
 		.setParameter("userName", userName)
 	    .setMaxResults(20)
 	    .getResultList();
+	
 		
 		if (accts == null)
 		{
@@ -119,20 +123,26 @@ public class BlogInsert extends HttpServlet
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		System.out.println(request.getParameter("guest"));
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		
+		long UsersID;
+		HttpSession session= request.getSession(true);
+		UsersID= (long) session.getAttribute("UserID");
+		System.out.println("It got it " +UsersID);
+		
+		//System.out.println(request.getParameter("guest"));
 		if (request.getParameter("guest")==null)
 		{
 		
 		String blog, output="";
     	blog=request.getParameter("blog");
     	Date date = new Date();
-		
-		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		try 
 		{
 			model.Blog user = new Blog();
 			user.setComments(blog);
 			user.setDates(date);
+			user.setUserid(UsersID);
 			insert(user);
 		} catch (Exception e){
 			System.out.println(e);

@@ -6,13 +6,13 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the BLOG_ACCT database table.
+ * The persistent class for the BLOGACCT database table.
  * 
  */
 @Entity
-@Table(name="BLOG_ACCT", schema= "TESTDB")
-@NamedQuery(name="BlogAcct.findAll", query="SELECT b FROM BlogAcct b")
-public class BlogAcct implements Serializable {
+@Table (name="Blogacct", schema= "TESTDB")
+@NamedQuery(name="Blogacct.findAll", query="SELECT b FROM Blogacct b")
+public class Blogacct implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,7 +29,7 @@ public class BlogAcct implements Serializable {
 	@Column(name="USER_NAME")
 	private String userName;
 
-	public BlogAcct() {
+	public Blogacct() {
 	}
 
 	public long getUserId() {

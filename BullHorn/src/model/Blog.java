@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="BLOGS")
+@Table(name="BLOGS", schema="TESTDB")
 @NamedQuery(name="Blog.findAll", query="SELECT b FROM Blog b")
 public class Blog implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +26,8 @@ public class Blog implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dates;
 
-	private BigDecimal userid;
+	@Column(name="USERID")
+	private long userid;
 
 	public Blog() {
 	}
@@ -53,11 +56,11 @@ public class Blog implements Serializable {
 		this.dates = dates;
 	}
 
-	public BigDecimal getUserid() {
+	public long getUserid() {
 		return this.userid;
 	}
 
-	public void setUserid(BigDecimal userid) {
+	public void setUserid(long userid) {
 		this.userid = userid;
 	}
 
