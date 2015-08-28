@@ -112,30 +112,23 @@ public class BlogInsert extends HttpServlet
 			output+="<tr><th>Recent Comments</th><th>User Id</th></tr> ";
 			List<Blog> a = getBlogs();
 			
-			
-			
-			
+			System.out.println(a.size());
 			String username,comment = "";
 			long UserID = 0;
 			Date postDate = null;
 			
 			UserID= accts.get(0).getUserId();
 			System.out.println("userID: " + UserID);
-				
-		
-			
-			
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("UserID", UserID);
-	    	System.out.println(UserID);
-			
 			
 			for(Blog b : a)
 			{
-				output+= "<tr><td>"+ b.getComments()+"</td><td>" + b.getUserid()+"</td></tr>";
+				output+= "<tr><td>"+ b.getComments()+"</td><td>" +b.getUserid()+"</td></tr>";
 		    	
 			}
+			session.setAttribute("LoggedIn", true);
 			request.setAttribute("message", output);
 		    getServletContext().getRequestDispatcher("/Output.jsp").forward(request,response);
 		    output="";
@@ -177,7 +170,7 @@ public class BlogInsert extends HttpServlet
 		List<Blog> a = getBlogs();
 		for(Blog b : a)
 		{
-			output+= "<tr><td>"+ b.getComments()+"</td><td>"+ b.getUserid()+"</td></tr>";
+			output+= "<tr><td>"+ b.getComments()+"</td><td>" + b.getUserid()+"</td></tr>";
 		}
 		request.setAttribute("message", output);
 	    getServletContext().getRequestDispatcher("/Output.jsp").forward(request,response);
@@ -193,7 +186,7 @@ public class BlogInsert extends HttpServlet
 			List<Blog> a = getBlogs();
 			for(Blog b : a)
 			{
-				output+= "<tr><td>"+ b.getComments()+"</td><td>"+ b.getUserid()+"</td></tr>";
+				output+= "<tr><td>"+ b.getComments()+"</td><td>" + b.getUserid()+"</td></tr>";
 				System.out.println("Test");
 			}
 			request.setAttribute("message", output);
