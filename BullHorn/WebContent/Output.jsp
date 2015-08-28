@@ -21,11 +21,16 @@
   <h1>BullHorn Blog</h1>
 </div>
 <form action = "Index.jsp">
-<input type=submit name=submit value="submit"> </input>
+<input type=submit name=submit value="New Post"> </input>
 </form>
 </nav>
 <div class= "container"></div>
-<form action="Index.jsp" >
+
+<form action= userProfile method="Get">
+
+<input type= submit name=submit value="See Profile"></input>
+</form>
+
 <br>
 ${message}
 <br>

@@ -35,8 +35,9 @@
 <br>
 <input  type=submit name=login value="Login"> </input>
 </form>
-<form action="BlogInsert" method = "post" >
+<form action="BlogInsert">
 <input  type=submit name=guest value="Guest"> </input>
+
 <br>
 <br>
 ${message}

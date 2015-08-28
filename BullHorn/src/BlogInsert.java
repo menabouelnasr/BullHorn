@@ -79,9 +79,10 @@ public class BlogInsert extends HttpServlet
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 		long ID;
-		
+    	
 		String userName = request.getParameter("user_name");
 		String pwd = request.getParameter("pwd");
 		System.out.println(userName);
@@ -89,30 +90,35 @@ public class BlogInsert extends HttpServlet
 		
 		
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		List accts = em.createQuery("Select b from BlogAcct b where b.userName = :userName")
+		List<model.Blogacct> accts = em.createQuery("Select b from Blogacct b where b.userName =:userName",model.Blogacct.class)
 		.setParameter("userName", userName)
 	    .setMaxResults(20)
 	    .getResultList();
 	
 		
-		if (accts == null)
+		if (accts.size()==0)
 		{
 			String output = "Incorrect user name or password";
 			request.setAttribute("message", output);
 		    getServletContext().getRequestDispatcher("/Login.jsp").forward(request,response);
 			
 		}
-		else {
-
+		else 
+		{
 			String blog, output="";
-			
+			System.out.println("account found");
 			output+="<table class= \"table table-striped\">";
-			output+="<tr><th>Recent Comments</th></tr> ";
+			output+="<tr><th>Recent Comments</th><th>User Id</th></tr> ";
 			List<Blog> a = getBlogs();
+			
 			for(Blog b : a)
 			{
-				output+= "<tr><td>"+ b.getComments()+"</td></tr>";
-				System.out.println("Test");
+				output+= "<tr><td>"+ b.getComments()+"</td><td>" + b.getUserid()+"</td></tr>";
+
+				HttpSession session = request.getSession();
+				ID= b.getUserid();
+		    	session.setAttribute("UserID", ID);
+		    	
 			}
 			request.setAttribute("message", output);
 		    getServletContext().getRequestDispatcher("/Output.jsp").forward(request,response);
@@ -151,11 +157,11 @@ public class BlogInsert extends HttpServlet
 			System.out.println("cerrado!");
 		}
 		output+="<table class= \"table table-striped\">";
-		output+="<tr><th>Recent Comments</th></tr> ";
+		output+="<tr><th>Recent Comments</th><th> UserID</th></tr> ";
 		List<Blog> a = getBlogs();
 		for(Blog b : a)
 		{
-			output+= "<tr><td>"+ b.getComments()+"</td></tr>";
+			output+= "<tr><td>"+ b.getComments()+"</td><td>"+ b.getUserid()+"</td></tr>";
 		}
 		request.setAttribute("message", output);
 	    getServletContext().getRequestDispatcher("/Output.jsp").forward(request,response);
@@ -166,11 +172,11 @@ public class BlogInsert extends HttpServlet
 			String blog, output="";
 			
 			output+="<table class= \"table table-striped\">";
-			output+="<tr><th>Recent Comments</th></tr> ";
+			output+="<tr><th>Recent Comments</th><th> User ID<th></tr> ";
 			List<Blog> a = getBlogs();
 			for(Blog b : a)
 			{
-				output+= "<tr><td>"+ b.getComments()+"</td></tr>";
+				output+= "<tr><td>"+ b.getComments()+"</td><td>"+ b.getUserid()+"</td></tr>";
 				System.out.println("Test");
 			}
 			request.setAttribute("message", output);

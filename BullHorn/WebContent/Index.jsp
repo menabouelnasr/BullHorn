@@ -27,7 +27,7 @@ Leave a Comment:<br>
 <input type="text" placeholder= "140 characters" name="blog"><br>
 <br>
 
-<input href="BlogInsert" type=submit name=submit value="submit"> </input>
+<input href="BlogInsert" type=submit name=submit value="Submit"> </input>
 <p></p>
 </form>
 </body>
