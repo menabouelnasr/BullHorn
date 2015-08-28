@@ -22,16 +22,18 @@
 </div>
 </nav>
 <% if ((Boolean)session.getAttribute("LoggedIn")) {%>
-<form action = "Index.jsp">
-<input type=submit name=submit value="New Post"> </input>
-</form>
-
-<div class= "container"></div>
-
-<form action= userProfile method="Get">
-
-<input type= submit name=submit value="See Profile"></input>
-</form>
+<div class= "form-group">
+	<div class = "col-sm-1">
+		<form action = "Index.jsp">
+		<input type=submit name=submit value="New Post"> </input>
+		</form>
+	</div>
+	<div class = "col-sm-2">
+		<form action= userProfile method="Get">
+		<input type= submit name=submit value="See Profile"></input>
+		</form>
+	</div>
+</div>
 <% }; %>
 <br>
 ${message}

@@ -140,14 +140,16 @@ public class BlogInsert extends HttpServlet
 	{
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		
-		long UsersID;
+		long UsersID = 0;
 		HttpSession session= request.getSession(true);
-		UsersID= (long) session.getAttribute("UserID");
-		System.out.println("It got it " +UsersID);
 		
 		//System.out.println(request.getParameter("guest"));
 		if (request.getParameter("guest")==null)
 		{
+			
+			UsersID= (long) session.getAttribute("UserID");
+			System.out.println("It got it " +UsersID);
+			
 		session.setAttribute("LoggedIn", true);
 		String blog, output="";
     	blog=request.getParameter("blog");
@@ -170,7 +172,7 @@ public class BlogInsert extends HttpServlet
 		List<Blog> a = getBlogs();
 		for(Blog b : a)
 		{
-			output+= "<tr><td>"+ b.getComments()+"</td><td>" + b.getUserid()+"</td></tr>";
+			output+= "<tr><td>"+ b.getComments()+"</td><td><a href= userProfile?userID="+ UsersID+">"+  b.getUserid()+"</a></td></tr>";
 		}
 		request.setAttribute("message", output);
 	    getServletContext().getRequestDispatcher("/Output.jsp").forward(request,response);
@@ -186,7 +188,7 @@ public class BlogInsert extends HttpServlet
 			List<Blog> a = getBlogs();
 			for(Blog b : a)
 			{
-				output+= "<tr><td>"+ b.getComments()+"</td><td>" + b.getUserid()+"</td></tr>";
+				output+= "<tr><td>"+ b.getComments()+"</td><td><a href= userProfile?userID="+ UsersID+">"+ b.getUserid()+"</a></td></tr>";
 				System.out.println("Test");
 			}
 			request.setAttribute("message", output);

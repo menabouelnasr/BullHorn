@@ -25,6 +25,7 @@
 <input  type=submit name=createUser value="New User"> </input></form>
 </nav>
 <div class= "container"></div>
+
 <form action="BlogInsert" method = "get">
 <br>
 <input type="text" placeholder= "User Name" name="user_name">
